@@ -19,7 +19,7 @@ export default function Application(props) {
         src="images/lhl.png"
         alt="Lighthouse Labs"
       />
-      <Button onClick>Confirm</Button>
+      <Button onClick danger>Confirm</Button>
       </section>
       <section className="schedule">
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
