@@ -2,9 +2,26 @@ import React from "react";
 
 import "components/Application.scss";
 import Button from '../components/Button'
-import DayListItem from "components/DayListItem";
+import DayList from "components/DayList"
 
 export default function Application(props) {
+  const days = [
+    {
+      id: 1,
+      name: "Monday",
+      spots: 2,
+    },
+    {
+      id: 2,
+      name: "Tuesday",
+      spots: 5,
+    },
+    {
+      id: 3,
+      name: "Wednesday",
+      spots: 0,
+    },
+  ]; 
   return (
     <main className="layout">
       <section className="sidebar">
@@ -23,6 +40,7 @@ export default function Application(props) {
       <Button onClick danger>Confirm</Button>
       </section>
       <section className="schedule">
+        < DayList days={days}/>
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
       </section>
     </main>
