@@ -2,6 +2,7 @@ import React from "react";
 
 import "components/Application.scss";
 import Button from '../components/Button'
+import DayListItem from "components/DayListItem";
 
 export default function Application(props) {
   return (

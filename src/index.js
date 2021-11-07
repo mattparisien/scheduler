@@ -6,6 +6,6 @@ import "index.scss";
 
 import Application from "components/Application";
 
-import DayListItem from './components/DayListItem'
+import DayListItem from "components/DayListItem";
 
 ReactDOM.render(<Application />, document.getElementById("root"));
