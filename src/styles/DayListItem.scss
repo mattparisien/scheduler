@@ -4,6 +4,7 @@
 .day-list {
   &__item {
     @include fade;
+    color: blue;
 
     color: #8395a7;
     height: 5rem;
