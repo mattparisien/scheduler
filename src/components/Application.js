@@ -31,7 +31,13 @@ export default function Application(props) {
         alt="Interview Scheduler"
       />
       <hr className="sidebar__separator sidebar--centered" />
-      <nav className="sidebar__menu"></nav>
+      <nav className="sidebar__menu">
+      <DayList
+        days={days}
+        day={"Monday"}
+        setDay={day => console.log(day)}
+      />
+      </nav>
       <img
         className="sidebar__lhl sidebar--centered"
         src="images/lhl.png"
@@ -40,7 +46,7 @@ export default function Application(props) {
       <Button onClick danger>Confirm</Button>
       </section>
       <section className="schedule">
-        < DayList days={days}/>
+        
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
       </section>
     </main>
