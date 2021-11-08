@@ -11,6 +11,7 @@ import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment";
+import Empty from "components/Appointment";
 
 // Button
 storiesOf("Button", module)
@@ -98,7 +99,6 @@ storiesOf("InterviewerList", module)
 	.add("Selected", () => <InterviewerList interviewers={interviewers} value={3} />)
 	.add("Clickable", () => <InterviewerList interviewers={interviewers} onChange={action("setInterviewer")} />);
 
-
 //Appointment
 storiesOf("Appointment", module)
 	.addParameters({
@@ -106,5 +106,5 @@ storiesOf("Appointment", module)
 	})
 	.add("Appointment", () => <Appointment />)
 	.add("Appointment with Time", () => <Appointment time={"12pm"} />)
-	.add("Header with Time", () => <Header time={"12pm"} />);
-
+	.add("Header with Time", () => <Header time={"12pm"} />)
+	.add("Empty", () => <Empty onAdd={action('onAdd')} />)
