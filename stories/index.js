@@ -109,7 +109,7 @@ storiesOf("Button", module)
           setInterviewer={action("setInterviewer")}
         />
       ));
-
+s
       //Interviewer List
       const interviewers = [
         { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -119,25 +119,25 @@ storiesOf("Button", module)
         { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
       ];
       
+      
       storiesOf("InterviewerList", module)
-        .addParameters({
-          backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-        })
-        .add("Initial", () => (
-          <InterviewerList
-            interviewers={interviewers}
-          />
-        ))
-        .add("Selected", () => (
-          <InterviewerList
-            interviewers={interviewers}
-            interviewer={3}
-          />
-        ))
-        .add("Clickable", () => (
-          <InterviewerList
-            interviewers={interviewers}
-            setInterviewer={action("setInterviewer")}
-          />
-        ));
-    
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
+  })
+  .add("Initial", () => (
+    <InterviewerList
+      interviewers={interviewers}
+    />
+  ))
+  .add("Selected", () => (
+    <InterviewerList
+      interviewers={interviewers}
+      value={3}
+    />
+  ))
+  .add("Clickable", () => (
+    <InterviewerList
+      interviewers={interviewers}
+      onChange={action("setInterviewer")}
+    />
+  ));
