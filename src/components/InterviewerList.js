@@ -8,7 +8,17 @@ export default function InterviewerList(props) {
   // setInterviewer:function - a function that accepts an interviewer id. This function will simply be passed down to the <InterviewerListItem>
   // interviewer:number - a number that represents the id of the currently selected interviewer
 
-  const interviewers = props.interviewers.map(person => < InterviewerListItem id={person.id} name={person.name} avatar={person.avatar} setInterviewer={props.setInterviewer}/>)
+  const interviewers = props.interviewers.map(person => {
+    return (
+      < InterviewerListItem
+        id={person.id}
+        name={person.name}
+        avatar={person.avatar}        
+        setInterviewer={e => props.setInterviewer(person.id)}
+        selected={person.id === props.interviewer}
+      />
+    )    
+  })
 
   return (
     <section className="interviewers">
