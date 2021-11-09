@@ -10,8 +10,11 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
+
 import Appointment from "components/Appointment";
-import Empty from "components/Appointment";
+import Header from "components/Appointment/Header";
+import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 
 // Button
 storiesOf("Button", module)
@@ -104,7 +107,8 @@ storiesOf("Appointment", module)
 	.addParameters({
 		backgrounds: [{ name: "white", value: "#fff", default: true }],
 	})
-	.add("Appointment", () => <Appointment />)
+	.add("Appointment", () => <Appointment/>)
 	.add("Appointment with Time", () => <Appointment time={"12pm"} />)
 	.add("Header with Time", () => <Header time={"12pm"} />)
 	.add("Empty", () => <Empty onAdd={action('onAdd')} />)
+	.add("Show", () => <Show onEdit={action("onEdit")} onDelete={action("onDelete")}/>)
