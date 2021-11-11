@@ -5,5 +5,10 @@ import Show from "./Show";
 import Empty from "./Empty";
 
 export default function Appointment(props) {
-	return <article className='appointment'></article>;
+	return (
+		<article className='appointment'>
+			<Header time={"5pm"} />
+			{props.interview ? <Show /> : <Empty />}
+		</article>
+	);
 }
