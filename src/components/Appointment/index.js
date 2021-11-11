@@ -5,10 +5,13 @@ import Show from "./Show";
 import Empty from "./Empty";
 
 export default function Appointment(props) {
+
+	const { interview, student, interviewer } = props;
+
 	return (
 		<article className='appointment'>
 			<Header time={"5pm"} />
-			{props.interview ? <Show /> : <Empty />}
+			{interview ? <Show student={student} interviewer={interviewer}/> : <Empty />}
 		</article>
 	);
 }
