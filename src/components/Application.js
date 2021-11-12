@@ -66,7 +66,7 @@ export default function Application(props) {
 	};
 
 	const appointmentsArray = Object.values(appointments);
-	
+
 	return (
 		<main className='layout'>
 			<section className='sidebar'>
@@ -77,7 +77,16 @@ export default function Application(props) {
 				</nav>
 				<img className='sidebar__lhl sidebar--centered' src='images/lhl.png' alt='Lighthouse Labs' />
 			</section>
-			<section className='schedule'>{/* Replace this with the schedule elements durint the "The Scheduler" activity. */}</section>
+			<section className='schedule'>
+				{appointmentsArray.map(appointment => {
+					return (
+						<Appointment
+							key={appointment.id}
+							{...appointment}
+						/>
+					)
+				})}
+			</section>
 		</main>
 	);
 }
