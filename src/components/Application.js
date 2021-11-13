@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 import "components/Application.scss";
 import Button from "../components/Button";
@@ -12,8 +12,8 @@ export default function Application(props) {
 
 	useEffect(() => {
 		axios.get("/api/days")
-		.then(response => setDays(response.data.result))
-	}, [days])
+		.then(response => response.data)
+	}, [])
 		
 	
 
