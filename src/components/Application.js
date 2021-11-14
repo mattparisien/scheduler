@@ -12,7 +12,7 @@ export default function Application(props) {
 
 	useEffect(() => {
 		axios.get("/api/days")
-		.then(response => response.data)
+		.then(response => setDays(response.data))
 	}, [])
 		
 	
