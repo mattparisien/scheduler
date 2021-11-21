@@ -32,19 +32,19 @@ export default function Application(props) {
   //format appointments
   dailyAppts= getAppointmentsForDay(state, state.day);
 
-  const appointmentsDisplay = dailyAppts.map(appointment => {
-    const interviewer = getInterview(state, appointment.interview);
+  const schedule = dailyAppts.map(appointment => {
+    const interview = getInterview(state, appointment.interview);
     return (
       <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
-        interview={interviewer}
+        interview={interview}
       />
     )
   })
 
-  appointmentsDisplay.push(<Appointment key="last" time="5pm" />);
+  schedule.push(<Appointment key="last" time="5pm" />);
 
   return (
     <main className="layout">
@@ -69,7 +69,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointmentsDisplay}
+        {schedule}
       </section>
     </main>
   );
