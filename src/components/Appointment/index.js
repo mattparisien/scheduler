@@ -19,6 +19,7 @@ export default function Appointment(props) {
 	const ERROR_SAVE = "ERROR_SAVE";
 	const ERROR_DELETE = "ERROR_DELETE";
 	const {
+		time,
 		interview,
 		bookInterview,
 		deleteInterview,
@@ -66,7 +67,7 @@ export default function Appointment(props) {
 
 	return (
 		<article className='appointment'>
-			<Header time={"5pm"} />
+			<Header time={time} />
 			{mode === EMPTY && (
 				<Empty onAdd={() => transition(CREATE)} />
 			)}
