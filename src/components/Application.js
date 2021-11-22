@@ -69,6 +69,9 @@ export default function Application(props) {
 	};
 
 	const deleteInterview = function (id) {
+
+		
+
 		const cancelInterview = {
 			...state.appointments[id],
 			interview: null,
@@ -103,6 +106,9 @@ export default function Application(props) {
 			state,
 			appointment.interview
 		);
+			
+		console.log(interviewer)			
+
 		return (
 			<Appointment
 				key={appointment.id}

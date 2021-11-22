@@ -23,10 +23,11 @@ export default function Appointment(props) {
 		bookInterview,
 		deleteInterview,
 		student,
-		interviewer,
 		interviewers,
 		id,
 	} = props;
+
+	
 
 	const {
 		mode,
@@ -77,7 +78,8 @@ export default function Appointment(props) {
 			{mode === SHOW && (
 				<Show
 					student={interview.student}
-					interviewer={interview.interviewer}
+					interview={interview}
+					onEdit={() => transition(EDIT)}
 					onDelete={() => transition(CONFIRM)}
 				/>
 			)}
@@ -85,8 +87,18 @@ export default function Appointment(props) {
 				<Form
 					onSave={saveInterview}
 					onCancel={() => back()}
-					interviewer={interviewer}
+					interview={interview}
 					interviewers={interviewers}
+					student={student}
+				/>
+			)}
+			{mode === EDIT && (
+				<Form
+					onSave={saveInterview}
+					onCancel={() => back()}
+					interviewer={interview.interviewer}
+					interviewers={interviewers}
+					interview={interview}
 					student={student}
 				/>
 			)}

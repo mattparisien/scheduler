@@ -7,16 +7,16 @@ export default function Show(props) {
   // onEdit:Function to be called when the user clicks the Edit button
   // onDelete:Function to be called when the user clicks the Delete button
 
-	const { student, interviewer, onEdit, onDelete } = props;
-	console.log(interviewer)
+	const { student, interview, onEdit, onDelete } = props;
+	
 
 	return (
 		<main className='appointment__card appointment__card--show'>
 			<section className='appointment__card-left'>
 				<h2 className='text--regular'>{student}</h2>
 				<section className='interviewer'>
-					<h4 className='text--light'>Interviewer</h4>
-					<h3 className='text--regular'>{interviewer.name}</h3>
+					<h4 className='text--light'>{interview && interview.interviewer.name}</h4>
+					<h3 className='text--regular'></h3>
 				</section>
 			</section>
 			<section className='appointment__card-right'>
