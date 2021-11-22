@@ -5,6 +5,7 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
@@ -20,6 +21,7 @@ export default function Appointment(props) {
 	const {
 		interview,
 		bookInterview,
+		deleteInterview,
 		student,
 		interviewer,
 		interviewers,
@@ -54,11 +56,23 @@ export default function Appointment(props) {
 			});
 	};
 
+	const deleteInterviewItem = function () {
+		transition(DELETING);
+		deleteInterview(id).then(result =>
+			transition(EMPTY)
+		);
+	};
+
 	return (
 		<article className='appointment'>
 			<Header time={"5pm"} />
 			{mode === EMPTY && (
 				<Empty onAdd={() => transition(CREATE)} />
+			)}
+			{mode === CONFIRM && (
+				<Confirm
+					onConfirm={deleteInterviewItem}
+				/>
 			)}
 			{mode === SHOW && (
 				<Show

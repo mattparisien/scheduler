@@ -68,7 +68,7 @@ export default function Application(props) {
 			});
 	};
 
-	const cancelInterview = function (id) {
+	const deleteInterview = function (id) {
 		const cancelInterview = {
 			...state.appointments[id],
 			interview: null,
@@ -111,7 +111,7 @@ export default function Application(props) {
 				interview={interviewer}
 				interviewers={dailyInterviewers}
 				bookInterview={bookInterview}
-				cancelInterview={cancelInterview}
+				deleteInterview={deleteInterview}
 			/>
 		);
 	});
