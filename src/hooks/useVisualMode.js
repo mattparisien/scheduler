@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 function useVisualMode(initial) {
-	const [mode, setMode] = useState(intitial);
-	const [history, setHistory] = useState([intial]);
+	const [mode, setMode] = useState(initial);
+	const [history, setHistory] = useState([initial]);
 
 	const transition = (newMode, replace = false) => {
 		if (!replace) {
