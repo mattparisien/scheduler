@@ -4,6 +4,7 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
+import Status from "./Status";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
@@ -22,7 +23,7 @@ export default function Appointment(props) {
 		student,
 		interviewer,
 		interviewers,
-		id
+		id,
 	} = props;
 
 	const {
@@ -31,16 +32,19 @@ export default function Appointment(props) {
 		back,
 	} = useVisualMode(interview ? SHOW : EMPTY);
 
-	const saveInterview = function (name, interviewer) {
+	const saveInterview = function (
+		name,
+		interviewer
+	) {
 		const interview = {
 			student: name,
 			interviewer,
 		};
 
-		console.log(interview.student)
+		console.log(interview.student);
 
 		transition(SAVING);
-		console.log('in save....', interview)
+		console.log("in save....", interview);
 		bookInterview(id, interview)
 			.then(() => {
 				transition(SHOW);
@@ -60,6 +64,7 @@ export default function Appointment(props) {
 				<Show
 					student={interview.student}
 					interviewer={interview.interviewer}
+					onDelete={() => transition(CONFIRM)}
 				/>
 			)}
 			{mode === CREATE && (
@@ -70,6 +75,12 @@ export default function Appointment(props) {
 					interviewers={interviewers}
 					student={student}
 				/>
+			)}
+			{mode === SAVING && (
+				<Status statusType='Saving' />
+			)}
+			{mode === DELETING && (
+				<Status statusType='Deleting' />
 			)}
 		</article>
 	);

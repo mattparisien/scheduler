@@ -46,7 +46,6 @@ export default function Application(props) {
 		setState({ ...state, day });
 
 	const bookInterview = function (id, interview) {
-		
 		//update existing appointment slot
 		const appointment = {
 			...state.appointments[id],
@@ -66,27 +65,26 @@ export default function Application(props) {
 					...prev,
 					appointments: appointments,
 				}));
-			})
+			});
 	};
 
 	const cancelInterview = function (id) {
-		// find the right appointment slot and set it's interview data to null.
-		const setInterviewNull = {
+		const cancelInterview = {
 			...state.appointments[id],
 			interview: null,
 		};
 
-		const appointmentsList = state.appointments;
-		appointmentsList[id] = setInterviewNull;
+		const appointments = state.appointments;
+		appointments[id] = cancelInterview;
 
 		return axios
 			.delete(
 				`http://localhost:8001/api/appointments/${id}`
 			)
-			.then(response => {
+			.then(result => {
 				setState(prev => ({
 					...prev,
-					appointments: appointmentsList,
+					appointments: appointments,
 				}));
 			});
 	};
