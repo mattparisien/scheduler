@@ -91,10 +91,10 @@ export default function Appointment(props) {
 				/>
 			)}
 			{mode === SAVING && (
-				<Status statusType='Saving' />
+				<Status statusMessage='Saving' />
 			)}
 			{mode === DELETING && (
-				<Status statusType='Deleting' />
+				<Status statusMessage='Deleting' />
 			)}
 		</article>
 	);
