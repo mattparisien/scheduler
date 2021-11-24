@@ -28,18 +28,9 @@ export default function Appointment(props) {
 		id,
 	} = props;
 
-	
+	const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
 
-	const {
-		mode,
-		transition,
-		back,
-	} = useVisualMode(interview ? SHOW : EMPTY);
-
-	const saveInterview = function (
-		name,
-		interviewer
-	) {
+	const saveInterview = function (name, interviewer) {
 		const interview = {
 			student: name,
 			interviewer,
@@ -60,22 +51,18 @@ export default function Appointment(props) {
 
 	const deleteInterviewItem = function () {
 		transition(DELETING);
-		deleteInterview(id).then(result =>
-			transition(EMPTY)
-		);
+		deleteInterview(id)
+			.then(result => {
+				transition(EMPTY);
+			})
+			.catch(err => transition(ERROR_DELETE));
 	};
 
 	return (
 		<article className='appointment'>
 			<Header time={time} />
-			{mode === EMPTY && (
-				<Empty onAdd={() => transition(CREATE)} />
-			)}
-			{mode === CONFIRM && (
-				<Confirm
-					onConfirm={deleteInterviewItem}
-				/>
-			)}
+			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+			{mode === CONFIRM && <Confirm onConfirm={deleteInterviewItem} />}
 			{mode === SHOW && (
 				<Show
 					student={interview.student}
@@ -103,12 +90,8 @@ export default function Appointment(props) {
 					student={student}
 				/>
 			)}
-			{mode === SAVING && (
-				<Status statusMessage='Saving' />
-			)}
-			{mode === DELETING && (
-				<Status statusMessage='Deleting' />
-			)}
+			{mode === SAVING && <Status statusMessage='Saving' />}
+			{mode === DELETING && <Status statusMessage='Deleting' />}
 		</article>
 	);
 }

@@ -11,7 +11,7 @@ function useVisualMode(initial) {
 		setMode(newMode);
 	};
 
-	const back = () => {
+	const back = function() {
 		if (history.length > 1) {
 			setMode(history[1]);
 			history.shift();
