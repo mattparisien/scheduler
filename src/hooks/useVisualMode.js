@@ -4,14 +4,14 @@ function useVisualMode(initial) {
 	const [mode, setMode] = useState(initial);
 	const [history, setHistory] = useState([initial]);
 
-	const transition = (newMode, replace = false) => {
+	const transition = (modeNew, replace = false) => {
 		if (!replace) {
-			setHistory([newMode, ...history]);
+			setHistory(history => [modeNew, ...history]);
 		}
-		setMode(newMode);
+		setMode(modeNew);
 	};
 
-	const back = function() {
+	const back = function () {
 		if (history.length > 1) {
 			setMode(history[1]);
 			history.shift();

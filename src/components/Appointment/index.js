@@ -45,24 +45,26 @@ export default function Appointment(props) {
 				transition(SHOW);
 			})
 			.catch(err => {
-				transition(ERROR_SAVE);
+				transition(ERROR_SAVE, true);
 			});
 	};
 
 	const deleteInterviewItem = function () {
-		transition(DELETING);
+		transition(DELETING, true);
 		deleteInterview(id)
 			.then(result => {
 				transition(EMPTY);
 			})
-			.catch(err => transition(ERROR_DELETE));
+			.catch(err => transition(ERROR_DELETE, true));
 	};
 
 	return (
 		<article className='appointment'>
 			<Header time={time} />
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-			{mode === CONFIRM && <Confirm onConfirm={deleteInterviewItem} />}
+			{mode === CONFIRM && (
+				<Confirm onCancel={() => back()} onConfirm={deleteInterviewItem} />
+			)}
 			{mode === SHOW && (
 				<Show
 					student={interview.student}
