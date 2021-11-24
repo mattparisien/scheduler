@@ -31,27 +31,9 @@ export default function Application(props) {
 		});
 	}, []);
 
-	const setDay = day => setState({ ...state, day });
+	
 
-	const bookInterview = function (id, interview) {
-		//update existing appointment slot
-		const appointment = {
-			...state.appointments[id],
-			interview: { ...interview },
-		};
-
-		const appointments = state.appointments;
-		appointments[id] = appointment;
-
-		return axios
-			.put(`http://localhost:8001/api/appointments/${id}`, { interview })
-			.then(result => {
-				setState(prev => ({
-					...prev,
-					appointments: appointments,
-				}));
-			});
-	};
+	
 
 	dailyAppts = getAppointmentsForDay(state, state.day);
 	dailyInterviewers = getInterviewersForDay(state, state.day);
