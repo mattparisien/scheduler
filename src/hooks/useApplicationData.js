@@ -1,4 +1,13 @@
-function useApplicationData() {
+import axios from "axios";
+
+export default function useApplicationData() {
+	const [state, setState] = useState({
+		day: "Monday",
+		days: [],
+		interviewers: {},
+		appointments: {},
+	});
+  
 	const setDay = day => setState({ ...state, day });
 
 	const bookInterview = function (id, interview) {
