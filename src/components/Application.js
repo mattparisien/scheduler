@@ -8,10 +8,13 @@ import {
 	getInterviewer,
 	getInterviewersForDay,
 } from "../helpers/selectors";
+import useApplicationData from "hooks/useApplicationData.js";
 
 export default function Application(props) {
 	let dailyInterviewers = [];
 	let dailyAppts = [];
+
+	const { state, setDay, bookInterview, deleteInterview } = useApplicationData();
 
 	useEffect(() => {
 		Promise.all([
