@@ -4,6 +4,8 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
+import Status from "./Status";
+import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
@@ -17,19 +19,16 @@ export default function Appointment(props) {
 	const ERROR_SAVE = "ERROR_SAVE";
 	const ERROR_DELETE = "ERROR_DELETE";
 	const {
+		time,
 		interview,
 		bookInterview,
+		deleteInterview,
 		student,
-		interviewer,
 		interviewers,
-		id
+		id,
 	} = props;
 
-	const {
-		mode,
-		transition,
-		back,
-	} = useVisualMode(interview ? SHOW : EMPTY);
+	const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
 
 	const saveInterview = function (name, interviewer) {
 		const interview = {
@@ -37,40 +36,64 @@ export default function Appointment(props) {
 			interviewer,
 		};
 
-		console.log(interview.student)
+		console.log(interview.student);
 
 		transition(SAVING);
-		console.log('in save....', interview)
+		console.log("in save....", interview);
 		bookInterview(id, interview)
 			.then(() => {
 				transition(SHOW);
 			})
 			.catch(err => {
-				transition(ERROR_SAVE);
+				transition(ERROR_SAVE, true);
 			});
+	};
+
+	const deleteInterviewItem = function () {
+		transition(DELETING, true);
+		deleteInterview(id)
+			.then(result => {
+				transition(EMPTY);
+			})
+			.catch(err => transition(ERROR_DELETE, true));
 	};
 
 	return (
 		<article className='appointment'>
-			<Header time={"5pm"} />
-			{mode === EMPTY && (
-				<Empty onAdd={() => transition(CREATE)} />
+			<Header time={time} />
+			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+			{mode === CONFIRM && (
+				<Confirm onCancel={() => back()} onConfirm={deleteInterviewItem} />
 			)}
 			{mode === SHOW && (
 				<Show
 					student={interview.student}
-					interviewer={interview.interviewer}
+					interview={interview}
+					onEdit={() => transition(EDIT)}
+					onDelete={() => transition(CONFIRM)}
 				/>
 			)}
 			{mode === CREATE && (
 				<Form
 					onSave={saveInterview}
 					onCancel={() => back()}
-					interviewer={interviewer}
+					interview={interview}
 					interviewers={interviewers}
 					student={student}
 				/>
 			)}
+			{mode === EDIT && (
+				<Form
+					onSave={saveInterview}
+					onCancel={() => back()}
+					interviewer={interview.interviewer}
+					interviewers={interviewers}
+					interview={interview}
+					student={student}
+				/>
+			)}
+			{mode === SAVING && <Status statusMessage='Saving' />}
+			{mode === DELETING && <Status statusMessage='Deleting' />}
 		</article>
 	);
 }
