@@ -26,6 +26,18 @@ export default function useApplicationData() {
 		});
 	}, []);
 
+	const getNumberOfSpots = function () {
+		let numOfSpots = 0;
+		const numberOfSpots = Object.values(state.appointments).forEach(
+			interview => {
+				if (interview.interview === null) {
+					numOfSpots++;
+				}
+			}
+		);
+		return numOfSpots;
+	};
+
 	//SetDay Function
 	const setDay = day => setState({ ...state, day });
 
@@ -45,7 +57,9 @@ export default function useApplicationData() {
 				setState(prev => ({
 					...prev,
 					appointments: appointments,
+					numberOfSpots: getNumberOfSpots()
 				}));
+				
 			});
 	};
 
@@ -71,20 +85,6 @@ export default function useApplicationData() {
 
 	console.log(Object.values(state.appointments));
 
-	const getNumberOfSpots = function () {
-		let numOfSpots = 0;
 
-		const numberOfSpots = Object.values(state.appointments).forEach(
-			interview => {
-				if (interview.interview === null) {
-					numOfSpots++;
-				}
-			}
-		);
-		return numOfSpots;
-	};
-
-	console.log(getNumberOfSpots())
-
-	return { state, setDay, bookInterview, deleteInterview };
+	return { state, setDay, bookInterview, deleteInterview, getNumberOfSpots };
 }

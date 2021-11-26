@@ -22,6 +22,8 @@ export default function Application(props) {
 		
 	} = useApplicationData();
 
+	console.log(state)
+
 	dailyAppts = getAppointmentsForDay(state, state.day);
 	dailyInterviewers = getInterviewersForDay(state, state.day);
 
