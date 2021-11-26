@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import InterviewerList from "components/InterviewerList";
 
 export default function useApplicationData() {
 	const [state, setState] = useState({
@@ -67,6 +68,23 @@ export default function useApplicationData() {
 				}));
 			});
 	};
+
+	console.log(Object.values(state.appointments));
+
+	const getNumberOfSpots = function () {
+		let numOfSpots = 0;
+
+		const numberOfSpots = Object.values(state.appointments).forEach(
+			interview => {
+				if (interview.interview === null) {
+					numOfSpots++;
+				}
+			}
+		);
+		return numOfSpots;
+	};
+
+	console.log(getNumberOfSpots())
 
 	return { state, setDay, bookInterview, deleteInterview };
 }
