@@ -26,6 +26,7 @@ export default function useApplicationData() {
 		});
 	}, []);
 
+	//Get amount of spots remaining for the day
 	const getNumberOfSpots = function () {
 		let numOfSpots = 0;
 		const numberOfSpots = Object.values(state.appointments).forEach(
@@ -79,6 +80,7 @@ export default function useApplicationData() {
 				setState(prev => ({
 					...prev,
 					appointments: appointments,
+					numberOfSpots: getNumberOfSpots()
 				}));
 			});
 	};
