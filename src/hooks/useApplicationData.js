@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InterviewerList from "components/InterviewerList";
+import { findByAltText } from "@testing-library/dom";
 
 export default function useApplicationData() {
 	const [state, setState] = useState({
@@ -26,18 +27,27 @@ export default function useApplicationData() {
 		});
 	}, []);
 
-	//Get amount of spots remaining for the day
-	const getNumberOfSpots = function () {
-		let numOfSpots = 0;
-		const numberOfSpots = Object.values(state.appointments).forEach(
-			interview => {
-				if (interview.interview === null) {
-					numOfSpots++;
-				}
+	//Retrieve each spot for a given day
+	function fetchSpots(state, appointments) {
+		let count = 0;
+		for (const id of state.appointments) {
+			if (appointments[id].interview === null) {
+				count += 1;
 			}
+		}
+		return count;
+	}
+
+	//Upate each spot by returning an array
+	function updateInterviewSpots(nameOfDay, daysState, appointments) {
+		const current = daysState.find(day => day.name === nameOfDay);
+		const numOfSpots = fetchSpots(current, appointments);
+
+		const final = daysState.map(val =>
+			val.name === nameOfDay ? { ...current, numOfSpots } : val
 		);
-		return numOfSpots;
-	};
+		return final;
+	}
 
 	//SetDay Function
 	const setDay = day => setState({ ...state, day });
@@ -49,8 +59,12 @@ export default function useApplicationData() {
 			interview: { ...interview },
 		};
 
-		const appointments = state.appointments;
-		appointments[id] = appointment;
+		const appointments = {
+			...state.appointments,
+			[id]: appointment,
+		};
+
+		const days = [...updateInterviewSpots(state.day, state.days, appointments)];
 
 		return axios
 			.put(`http://localhost:8001/api/appointments/${id}`, { interview })
@@ -58,9 +72,8 @@ export default function useApplicationData() {
 				setState(prev => ({
 					...prev,
 					appointments: appointments,
-					numberOfSpots: getNumberOfSpots()
+					days,
 				}));
-				
 			});
 	};
 
@@ -80,13 +93,9 @@ export default function useApplicationData() {
 				setState(prev => ({
 					...prev,
 					appointments: appointments,
-					numberOfSpots: getNumberOfSpots()
 				}));
 			});
 	};
 
-	console.log(Object.values(state.appointments));
-
-
-	return { state, setDay, bookInterview, deleteInterview, getNumberOfSpots };
+	return { state, setDay, bookInterview, deleteInterview };
 }

@@ -7,6 +7,9 @@ export default function DayList(props) {
   // day:String the currently selected day
   // setDay: Function sets the currently selected day and accepts the name of the day eg. "Monday", "Tuesday"
 
+
+  
+
   const dayListItems = props.days.map(day => {
     return (
       <DayListItem
