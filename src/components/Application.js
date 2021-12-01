@@ -21,6 +21,8 @@ export default function Application(props) {
 		deleteInterview,
 	} = useApplicationData();
 
+	console.log(state.days)
+
 	dailyAppts = getAppointmentsForDay(state, state.day);
 	dailyInterviewers = getInterviewersForDay(state, state.day);
 

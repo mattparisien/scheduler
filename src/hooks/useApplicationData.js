@@ -41,11 +41,14 @@ export default function useApplicationData() {
 	//Upate each spot by returning an array
 	function updateInterviewSpots(nameOfDay, daysState, appointments) {
 		const current = daysState.find(day => day.name === nameOfDay);
-		const numOfSpots = fetchSpots(current, appointments);
+		const spots = fetchSpots(current, appointments);
 
 		const final = daysState.map(val =>
-			val.name === nameOfDay ? { ...current, numOfSpots } : val
+			val.name === nameOfDay ? { ...current, spots } : val
 		);
+
+		console.log('final.....', final)
+
 		return final;
 	}
 
