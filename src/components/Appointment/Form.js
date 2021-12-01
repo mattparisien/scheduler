@@ -12,7 +12,7 @@ export default function Form(props) {
 
 	const validateInput = function (interviewer, student) {
     if (!student) {
-      setErr("Please enter your name");
+      setErr("Student name cannot be blank");
       return;
     }
     else if (!interviewer) {
