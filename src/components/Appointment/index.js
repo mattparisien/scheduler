@@ -25,6 +25,7 @@ export default function Appointment(props) {
 		deleteInterview,
 		interviewers,
 		id,
+		student
 	} = props;
 
 	const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
@@ -76,7 +77,7 @@ export default function Appointment(props) {
 					onCancel={() => back()}
 					interview={interview}
 					interviewers={interviewers}
-					student={interview.student}
+					student={student}
 				/>
 			)}
 			{mode === EDIT && (
