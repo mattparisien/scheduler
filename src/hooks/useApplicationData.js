@@ -47,7 +47,7 @@ export default function useApplicationData() {
 			val.name === nameOfDay ? { ...current, spots } : val
 		);
 
-		console.log('final.....', final)
+		console.log("final.....", final);
 
 		return final;
 	}
@@ -90,12 +90,15 @@ export default function useApplicationData() {
 		const appointments = state.appointments;
 		appointments[id] = cancelInterview;
 
+		const days = [...updateInterviewSpots(state.day, state.days, appointments)];
+
 		return axios
 			.delete(`http://localhost:8001/api/appointments/${id}`)
 			.then(result => {
 				setState(prev => ({
 					...prev,
 					appointments: appointments,
+					days,
 				}));
 			});
 	};
