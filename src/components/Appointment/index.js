@@ -23,7 +23,6 @@ export default function Appointment(props) {
 		interview,
 		bookInterview,
 		deleteInterview,
-		student,
 		interviewers,
 		id,
 	} = props;
@@ -77,17 +76,17 @@ export default function Appointment(props) {
 					onCancel={() => back()}
 					interview={interview}
 					interviewers={interviewers}
-					student={student}
+					student={interview.student}
 				/>
 			)}
 			{mode === EDIT && (
 				<Form
 					onSave={saveInterview}
 					onCancel={() => back()}
-					interviewer={interview.interviewer}
+					interviewer={interview.interviewer.id}
 					interviewers={interviewers}
 					interview={interview}
-					student={student}
+					student={interview.student}
 				/>
 			)}
 			{mode === SAVING && <Status statusMessage='Saving' />}
