@@ -21,7 +21,7 @@ export default function Form(props) {
     }
     else {
       setErr(null);
-      onSave(student, interviewer);
+      onSave(studentName, interviewer);
     }
   }
 
