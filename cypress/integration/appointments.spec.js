@@ -32,6 +32,8 @@ describe("Appointments", () => {
 		cy.get('[data-testid="student-name-input"]').type("Lydia Miller-Jones");
 		cy.get('[alt="Sylvia Palmer"]').click();
 		cy.get(".button--danger").contains("Cancel").click();
+    cy.contains(".appointment__card--show", "Lydia Miller-Jones")
+    .should("not.exist");
 	});
 
   it('should delete an interview', () => {
