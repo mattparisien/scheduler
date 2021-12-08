@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import InterviewerList from "components/InterviewerList";
-import { findByAltText } from "@testing-library/dom";
 
 export default function useApplicationData() {
 	const [state, setState] = useState({
@@ -46,8 +44,6 @@ export default function useApplicationData() {
 		const final = daysState.map(val =>
 			val.name === nameOfDay ? { ...current, spots } : val
 		);
-
-		console.log("final.....", final);
 
 		return final;
 	}

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "./styles.scss";
 import Header from "./Header";
 import Show from "./Show";
@@ -26,7 +26,7 @@ export default function Appointment(props) {
 		deleteInterview,
 		interviewers,
 		id,
-		student
+		student,
 	} = props;
 
 	const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
@@ -62,7 +62,7 @@ export default function Appointment(props) {
 			<Header time={time} />
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
 			{mode === CONFIRM && (
-				<Confirm onCancel={() => back()} onConfirm={deleteInterviewItem} />
+				<Confirm onCancel={back} onConfirm={deleteInterviewItem} />
 			)}
 			{mode === SHOW && (
 				<Show
@@ -75,7 +75,7 @@ export default function Appointment(props) {
 			{mode === CREATE && (
 				<Form
 					onSave={saveInterview}
-					onCancel={() => back()}
+					onCancel={back}
 					interview={interview}
 					interviewers={interviewers}
 					student={student}
@@ -84,7 +84,7 @@ export default function Appointment(props) {
 			{mode === EDIT && (
 				<Form
 					onSave={saveInterview}
-					onCancel={() => back()}
+					onCancel={back}
 					interviewer={interview.interviewer.id}
 					interviewers={interviewers}
 					interview={interview}
@@ -93,8 +93,12 @@ export default function Appointment(props) {
 			)}
 			{mode === SAVING && <Status statusMessage='Saving' />}
 			{mode === DELETING && <Status statusMessage='Deleting' />}
-			{ mode === ERROR_SAVE && <Error onClose={() => back()} message={"There was an error saving your interview"} />}
-      { mode === ERROR_DELETE && <Error onClose={() => back()} message={"There was an error deleting your interview"} />}
+			{mode === ERROR_SAVE && (
+				<Error onClose={back} message={"Error saving your interview"} />
+			)}
+			{mode === ERROR_DELETE && (
+				<Error onClose={back} message={"Error deleting your interview"} />
+			)}
 		</article>
 	);
 }

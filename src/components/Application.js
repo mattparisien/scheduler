@@ -1,8 +1,8 @@
 import "components/Application.scss";
 import DayList from "components/DayList.js";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Appointment from "./Appointment/index.js";
-import axios from "axios";
+
 import {
 	getAppointmentsForDay,
 	getInterviewer,
@@ -21,7 +21,7 @@ export default function Application(props) {
 		deleteInterview,
 	} = useApplicationData();
 
-	console.log(state.days)
+	console.log(state.days);
 
 	dailyAppts = getAppointmentsForDay(state, state.day);
 	dailyInterviewers = getInterviewersForDay(state, state.day);
@@ -38,7 +38,6 @@ export default function Application(props) {
 				interviewers={dailyInterviewers}
 				bookInterview={bookInterview}
 				deleteInterview={deleteInterview}
-				
 			/>
 		);
 	});
