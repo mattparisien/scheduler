@@ -1,12 +1,6 @@
 import React from "react";
 
 export default function Show(props) {
-	/** PROPS **/
-	// student:String eg. "Lydia Miller-Jones"
-	// interviewer:Object we can use the interview object that already exists in stories/index.js for this
-	// onEdit:Function to be called when the user clicks the Edit button
-	// onDelete:Function to be called when the user clicks the Delete button
-
 	const { student, interview, onEdit, onDelete } = props;
 
 	return (
