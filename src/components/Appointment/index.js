@@ -6,6 +6,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
@@ -92,6 +93,8 @@ export default function Appointment(props) {
 			)}
 			{mode === SAVING && <Status statusMessage='Saving' />}
 			{mode === DELETING && <Status statusMessage='Deleting' />}
+			{ mode === ERROR_SAVE && <Error onClose={() => back()} message={"There was an error saving your interview"} />}
+      { mode === ERROR_DELETE && <Error onClose={() => back()} message={"There was an error deleting your interview"} />}
 		</article>
 	);
 }
