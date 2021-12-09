@@ -1,6 +1,6 @@
 # Interview Scheduler
 
-A Lighthouse Labs project by Matthew Parisien. 
+A [Lighthouse Labs](https://github.com/lighthouse-labs) project by [Matthew Parisien](https://github.com/bilykb). 
 
 # Project Sypnosis
 
